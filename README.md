@@ -2,7 +2,14 @@
 
 A command-line Python application that combines a simple user login system with three text-analysis tools: named entity recognition, language detection, and sentiment analysis. The analysis is done by the [NLP Cloud](https://nlpcloud.com/) API.
 
-I built this to practice object-oriented Python, input validation, and working with a third-party API.
+I built this to practice object-oriented Python, input validation, and working with a third-party 
+
+
+API## Demo
+
+![NLP Analysis App running in the terminal](screenshots/demo.png)
+
+
 
 ## Features
 
