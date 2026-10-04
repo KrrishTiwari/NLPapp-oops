@@ -6,16 +6,6 @@ This project was built while learning **Python, OOP, APIs, and NLP**, and helped
 
 ---
 
-## 📸 Preview
-
-<p align="center">
-  <img src="https://placehold.co/900x500?text=NLP+Analysis+App" alt="NLP Analysis App Preview">
-</p>
-
-> Replace the image above with a screenshot of your actual application once you have one.
-
----
-
 ## ✨ Features
 
 ### 👤 User Registration & Login
