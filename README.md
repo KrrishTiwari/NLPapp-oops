@@ -1,296 +1,137 @@
-# 🧠 NLP Analysis App
+# NLP Analysis App
 
-A simple **Python-based NLP application** that lets users create an account, log in, and perform different Natural Language Processing tasks through a menu-driven interface.
+A command-line Python application that combines a simple user login system with three text-analysis tools: named entity recognition, language detection, and sentiment analysis. The analysis is done by the [NLP Cloud](https://nlpcloud.com/) API.
 
-This project was built while learning **Python, OOP, APIs, and NLP**, and helped me understand how different NLP services can be connected to a Python application.
+I built this to practice object-oriented Python, input validation, and working with a third-party API.
 
----
+## Features
 
-## ✨ Features
+- **Accounts:** register with a name, email, and password, then log in. Emails are checked for a valid format, duplicates are rejected, and passwords are hidden while typing.
+- **Named Entity Recognition (NER):** enter a paragraph and describe what to look for (for example, "programming languages") and the app returns the matching entities.
+- **Language detection:** returns the language code of the text you enter, such as `en`.
+- **Sentiment analysis:** returns the highest-scoring sentiment label for a paragraph. You can optionally give a target to score the sentiment toward.
 
-### 👤 User Registration & Login
+## Requirements
 
-* Create a new account using name, email, and password.
-* Prevents registration with an already-used email.
-* Basic email validation.
-* Password input is hidden while typing.
-* Login system using the stored credentials.
+- Python 3.8 or newer
+- An NLP Cloud account and API key
 
-### 🔎 Named Entity Recognition (NER)
+## Installation
 
-Enter a paragraph and specify what you want to search for.
-
-For example:
-
-```text
-John Doe started learning Javascript and Python.
-He now works at Google.
-```
-
-You can search for:
-
-```text
-programming languages
-```
-
-The application sends the request to NLPCloud and returns the detected entities.
-
-### 🌍 Language Detection
-
-Enter a paragraph and the application detects its language.
-
-Example:
-
-```text
-This is a simple English paragraph.
-```
-
-Output:
-
-```text
-en
-```
-
-### 😊 Sentiment Analysis
-
-Enter a paragraph and the application determines its sentiment.
-
-You can also provide a specific target when required.
-
-Example:
-
-```text
-I really enjoyed this movie. The acting was excellent.
-```
-
-The application returns the highest-scoring sentiment label.
-
----
-
-## 🛠️ Technologies Used
-
-* 🐍 **Python**
-* 🧱 **Object-Oriented Programming**
-* 🌐 **NLPCloud API**
-* 🔐 **Environment Variables**
-* 📦 **Regular Expressions**
-* 🔑 **Getpass**
-* 📚 **Python Dictionaries**
-
----
-
-## 📂 Project Structure
-
-```text
-NLP-Analysis-App/
-│
-├── app.py
-├── README.md
-├── requirements.txt
-├── .env.example
-└── .gitignore
-```
-
----
-
-## 🚀 Getting Started
-
-### 1. Clone the repository
+Clone the repository and move into it:
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/NLP-Analysis-App.git
+git clone https://github.com/KrrishTiwari/NLPapp-oops.git
+cd NLPapp-oops
 ```
 
-Move into the project directory:
-
-```bash
-cd NLP-Analysis-App
-```
-
-### 2. Install the required packages
+Install the dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-If you haven't created `requirements.txt` yet, it should contain:
+## Configuration
 
-```text
-nlpcloud
+The app reads your API key from the `NLPCLOUD_API_KEY` environment variable. The key is never stored in the code, so set the variable before running the app.
+
+**macOS / Linux**
+
+```bash
+export NLPCLOUD_API_KEY="your_api_key_here"
 ```
 
-### 3. Create an NLPCloud API key
-
-Create an account on [NLPCloud](https://nlpcloud.com/) and generate an API key.
-
-**Never put your API key directly inside the Python file.**
-
----
-
-## 🔐 Setting up the API Key
-
-The application reads the API key from an environment variable:
-
-```python
-API_TOKEN = os.getenv("NLPCLOUD_API_KEY")
-```
-
-### Windows PowerShell
+**Windows (PowerShell)**
 
 ```powershell
 $env:NLPCLOUD_API_KEY="your_api_key_here"
 ```
 
-Then run:
-
-```powershell
-python app.py
-```
-
-### Windows Command Prompt
+**Windows (Command Prompt)**
 
 ```cmd
 set NLPCLOUD_API_KEY=your_api_key_here
-python app.py
 ```
 
-You can also use a `.env` file if you prefer, but **make sure `.env` is included in `.gitignore**.
+The variable only lasts for the current terminal session, so run the app from the same terminal window.
 
-Example `.env.example`:
-
-```text
-NLPCLOUD_API_KEY=your_api_key_here
-```
-
----
-
-## ▶️ Running the Application
-
-Run:
+## Usage
 
 ```bash
 python app.py
 ```
 
-You'll see:
+You will start at the main menu:
 
-```text
+```
 Hi! How would you like to proceed?
-
 1. Not a Member? Register
 2. Already a Member? Login
 3. Exit
 ```
 
-After logging in:
+After logging in, you can choose a feature:
 
-```text
+```
 Hi! How would you like to proceed?
-
 1. NER
 2. Language Detection
 3. Sentiment Analysis
 4. Logout
 ```
 
----
+### Example inputs
 
-## 🧩 How It Works
+**NER**
 
-The application is organized around a single `NLPapp` class.
-
-```text
-                    NLP Analysis App
-                           │
-                    ┌──────┴──────┐
-                    │             │
-               Authentication    NLP Features
-                    │             │
-              ┌─────┴─────┐   ┌───┼────┬──────────┐
-              │           │   │   │    │          │
-          Register      Login NER Language  Sentiment
-                                Detection  Analysis
+```
+Paragraph: John Doe started learning JavaScript and Python. He now works at Google.
+Search for: programming languages
 ```
 
-The application keeps registered users in a Python dictionary while it is running.
+**Language detection**
 
-For example:
-
-```python
-{
-    "user@example.com": ["Krrish", "password"]
-}
+```
+Paragraph: This is a simple English paragraph.
+Output: en
 ```
 
-The NLP features communicate with NLPCloud through its API.
+**Sentiment analysis**
 
----
-
-## 🔒 Security
-
-The API key is **not stored directly in the source code**.
-
-Instead, the application reads it from:
-
-```text
-NLPCLOUD_API_KEY
+```
+Paragraph: I really enjoyed this movie. The acting was excellent.
+Target: (press Enter to skip)
 ```
 
-The real API key should never be committed to GitHub.
+## Project Structure
 
-A `.gitignore` file should include:
-
-```text
-.env
+```
+NLPapp-oops/
+├── app.py              # Application code
+├── requirements.txt    # Python dependencies
+├── README.md
+└── .gitignore
 ```
 
----
+## How It Works
 
-## 📚 What I Learned
+Everything lives in a single `NLPapp` class. Two menu loops handle navigation (one before login, one after), and small helper methods validate input for names, emails, and passwords. The NLP features send requests to NLP Cloud using the `nlpcloud` client. NER and sentiment analysis use the `gpt-oss-120b` model, and language detection uses `python-langdetect`. API errors are caught and printed instead of crashing the program.
 
-Building this project helped me practice:
+## Known Limitations
 
-* Classes and objects
-* Constructors
-* Private methods and attributes
-* Dictionaries
-* Loops and conditional statements
-* Functions and helper methods
-* Exception handling
-* Regular expressions
-* API integration
-* Environment variables
-* User authentication logic
-* Working with JSON responses
-* Basic NLP concepts
+- Users are stored in a dictionary in memory, so all accounts are lost when the program exits.
+- Passwords are stored as plain text. This is fine for a learning project but should never be done in a real application.
+- The NER and sentiment features print the model's response mostly as returned, without much formatting.
+- There are no automated tests yet.
 
----
+## Roadmap
 
-## 🔮 Future Improvements
+- Hash passwords with `bcrypt` or `hashlib`
+- Save users to SQLite instead of memory
+- Format the analysis output so it is easier to read
+- Add unit tests for the input validation and menu logic
+- Keep a history of past analyses for each user
 
-There are several things I'd like to improve in future versions:
+## Contributing
 
-* 💾 Store users in a real database instead of an in-memory dictionary
-* 🔐 Hash passwords instead of storing them as plain text
-* 🖥️ Build a graphical/web interface
-* 📊 Display NLP results in a more user-friendly format
-* 📝 Add analysis history
-* 📈 Add more NLP features
-* ☁️ Deploy the application online
-
----
-
-## 👨‍💻 About the Project
-
-This is a learning project built to practice **Python and Natural Language Processing** while working with real API-based NLP services.
-
-It started as a simple menu-driven Python program and gradually evolved into an application with authentication and multiple NLP features.
-
----
-
-## ⭐ If you found this project interesting
-
-Feel free to explore the code, suggest improvements, or use the project as a starting point for your own NLP experiments.
-
-**Built with Python 🐍 and a lot of learning along the way.**
-
+This is a personal learning project, but suggestions are welcome. If you spot a bug or have an idea, open an issue.
